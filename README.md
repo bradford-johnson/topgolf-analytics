@@ -1,1 +1,1 @@
-# Topgolf Scores Analysis
+# Topgolf Score Analysis
