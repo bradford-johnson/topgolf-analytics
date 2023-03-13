@@ -1,4 +1,4 @@
-# laod packages
+# load packages
 library(ggsankey)
 library(tidyverse)
 
