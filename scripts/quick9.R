@@ -1,8 +1,8 @@
 # load packages
-library(ggsankey)
-library(tidyverse)
+pacman::p_load(ggsankey,
+               tidyverse)
 
-tg <- read_csv("topgolf-scores-quick9.csv")
+tg <- read_csv("data/quick9.csv")
 
 tg <- tg |>
   select(red_missed, yellow_missed, green_missed)
@@ -27,4 +27,4 @@ pl +
   geom_sankey_text(size = 4, 
                    color = "black",
                    type = "sankey") +# This specifies the Label format for each node
-scale_fill_manual(values = c("green", "red", "yellow"))
+scale_fill_manual(values = c("red", "yellow", "green"))
