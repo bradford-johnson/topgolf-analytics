@@ -6,8 +6,8 @@ dat <- readr::read_csv("data/targets-2.csv")
 
 set.seed(10)
 # generate a random vector of numbers between 1 and 6
-y <- runif(100, min = 0.0, max = 15)
-x <- runif(100, min = 0.0, max = 6)
+y <- runif(200, min = 0.0, max = 10)
+x <- runif(200, min = 0.0, max = 6)
 df <- data.frame(x,y)
 
 # target colors
@@ -70,13 +70,32 @@ tg <- ggplot() +
 tg +
   geom_point(data = df, aes(x, y))
 
-my_colors<- paletteer::paletteer_c("ggthemes::Green", 14)
+my_colors<- paletteer::paletteer_c("ggthemes::Blue-Green Sequential", 14)
 
 tg +
   stat_density2d_filled(data = df, aes(x,y), alpha = .75) +
-  theme_void() +
-  scale_fill_manual(values = my_colors)
-
-
-# tg +
-#   stat_bin_hex(data = df, aes(x,y), bins = 12, alpha = .6)
+  scale_fill_manual(values = my_colors) +
+  geom_circle(data = red_target, aes(x0=x, y0=y, r=size), color = t_red) +
+  
+  geom_circle(data = yellow_target, aes(x0=x, y0=y, r=size), color = t_yellow) +
+  
+  geom_circle(data = green_target, aes(x0=x, y0=y, r=size), color = t_green) +
+  
+  geom_circle(data = brown_target, aes(x0=x, y0=y, r=size), color = t_brown) +
+  
+  geom_circle(data = blue_target, aes(x0=x, y0=y, r=size), color = t_blue) +
+  
+  geom_circle(data = white_target, aes(x0=x, y0=y, r=size), color = t_white) +
+  
+  geom_rect(aes(xmin = 1.2, xmax = 4.8, ymin = 13.5, ymax = 14),
+            color = t_trench, linewidth = .3, fill = NA) +
+  
+  scale_x_continuous(limits = c(0,8)) +
+  
+  geom_text(mapping = aes(x = 7, y = 1), label = "25 YDS") +
+  geom_text(mapping = aes(x = 7, y = 3), label = "50 YDS") +
+  geom_text(mapping = aes(x = 7, y = 5.25), label = "90 YDS") +
+  geom_text(mapping = aes(x = 7, y = 7.5), label = "125 YDS") +
+  geom_text(mapping = aes(x = 7, y = 9.25), label = "150 YDS") +
+  geom_text(mapping = aes(x = 7, y = 11.50), label = "185 YDS") +
+  geom_text(mapping = aes(x = 7, y = 13.75), label = "215 YDS")
