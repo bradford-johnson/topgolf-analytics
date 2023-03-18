@@ -1,15 +1,31 @@
 library(ggplot2)
 library(dplyr)
 library(ggforce)
+library(showtext)
+library(htmltools)
+
+showtext_auto()
 
 dat <- readr::read_csv("data/targets-2.csv")
 
-set.seed(10)
+set.seed(58)
 # generate a random vector of numbers between 1 and 6
-y <- runif(200, min = 0.0, max = 10)
+y <- runif(200, min = 0.0, max = 13)
 x <- runif(200, min = 0.0, max = 6)
 df <- data.frame(x,y)
 
+# add fonts
+font_add(family = "fb",
+         regular = "C:/Users/Bradf/AppData/Local/Microsoft/Windows/Fonts/Font Awesome 6 Brands-Regular-400.otf")
+
+font_add_google(name = "Ubuntu", family = "Ubuntu")
+font <- "Ubuntu"
+
+font_add_google(name = "Dosis", family = "Dosis")
+# load caption
+caption = paste0("<span style='font-family:fb;'>&#xf09b;</span>",
+                 "<span style='font-family:sans;color:white;'>.</span>",
+                 "<span style='font-family:Dosis;'>bradfordjohnson</span>")
 # target colors
 t_red <- "#F00016"
 
@@ -70,7 +86,7 @@ tg <- ggplot() +
 tg +
   geom_point(data = df, aes(x, y))
 
-my_colors<- paletteer::paletteer_c("ggthemes::Blue-Green Sequential", 14)
+my_colors<- paletteer::paletteer_c("grDevices::Reds 2", 14, direction = -1)
 
 tg +
   stat_density2d_filled(data = df, aes(x,y), alpha = .75) +
@@ -92,12 +108,31 @@ tg +
   
   scale_x_continuous(limits = c(0,8)) +
   
-  geom_text(mapping = aes(x = 7, y = 1), label = "25 YDS") +
-  geom_text(mapping = aes(x = 7, y = 3), label = "50 YDS") +
-  geom_text(mapping = aes(x = 7, y = 5.25), label = "90 YDS") +
-  geom_text(mapping = aes(x = 7, y = 7.5), label = "125 YDS") +
-  geom_text(mapping = aes(x = 7, y = 9.25), label = "150 YDS") +
-  geom_text(mapping = aes(x = 7, y = 11.50), label = "185 YDS") +
-  geom_text(mapping = aes(x = 7, y = 13.75), label = "215 YDS")
+  geom_text(mapping = aes(x = 7.2, y = 1), label = "25 yd",
+            family = font) +
+  geom_text(mapping = aes(x = 7.2, y = 3), label = "50 yd",
+            family = font) +
+  geom_text(mapping = aes(x = 7.2, y = 5.25), label = "90 yd",
+            family = font) +
+  geom_text(mapping = aes(x = 7.2, y = 7.5), label = "125 yd",
+            family = font) +
+  geom_text(mapping = aes(x = 7.2, y = 9.25), label = "150 yd",
+            family = font) +
+  geom_text(mapping = aes(x = 7.2, y = 11.50), label = "185 yd",
+            family = font) +
+  geom_text(mapping = aes(x = 7.2, y = 13.75), label = "215 yd",
+            family = font) +
+  theme_void() +
+  labs(title = "Topgolf Ball Heatmap",
+       subtitle = "200 random balls",
+       caption = caption) +
+  theme(legend.position = "none",
+        plot.caption = ggtext::element_textbox_simple(color="#3D4750", halign = 0.1, size = 10, margin = margin(2,0,0,0,"mm")),
+        plot.title = element_text(family = font, hjust = .5, size = 16),
+        plot.subtitle = element_text(family = font, hjust =.5),
+        panel.background = element_rect(fill = "#F1F1F1FF", color = "#F1F1F1FF"),
+        plot.background = element_rect(fill = "#F1F1F1FF", color = "#F1F1F1FF"),
+        plot.margin = unit(c(1,1,1,1),"mm"))
 
-# ggsave("test.png")
+ggsave("test.png", height = 3, width = 2, dpi = 300)
+
