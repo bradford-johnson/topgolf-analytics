@@ -127,12 +127,14 @@ tg +
        subtitle = "200 random balls",
        caption = caption) +
   theme(legend.position = "none",
-        plot.caption = ggtext::element_textbox_simple(color="#3D4750", halign = 0.1, size = 10, margin = margin(2,0,0,0,"mm")),
-        plot.title = element_text(family = font, hjust = .5, size = 16),
-        plot.subtitle = element_text(family = font, hjust =.5),
+        plot.caption = ggtext::element_textbox_simple(color="#3D4750", halign = 0.1, size = 13),
+        plot.title = element_text(family = font, hjust = .5, size = 16, vjust = -1),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        plot.subtitle = element_text(family = font, hjust =.5, size = 12),
         panel.background = element_rect(fill = "#F1F1F1FF", color = "#F1F1F1FF"),
         plot.background = element_rect(fill = "#F1F1F1FF", color = "#F1F1F1FF"),
-        plot.margin = unit(c(1,1,1,1),"mm"))
+        plot.margin = unit(c(2,.5,3,.5),"mm"))
 
 ggsave("test.png", height = 3, width = 2, dpi = 300)
 
