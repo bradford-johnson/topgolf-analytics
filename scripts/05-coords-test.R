@@ -1,8 +1,8 @@
-library(ggplot2)
-library(dplyr)
-library(ggforce)
-library(showtext)
-library(htmltools)
+pacman::p_load(ggplot2,
+               dplyr,
+               ggforce,
+               showtext,
+               htmltools)
 
 showtext_auto()
 
