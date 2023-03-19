@@ -1,3 +1,4 @@
+# load packages
 pacman::p_load(ggplot2,
                dplyr,
                ggforce,
@@ -59,6 +60,7 @@ t_white <- "#BDC1C0"
   
 t_trench <- "#141615"
 
+# create visual
 tg <- ggplot() + 
   geom_circle(data = red_target, aes(x0=x, y0=y, r=size), color = t_red,
               fill = t_red) +
