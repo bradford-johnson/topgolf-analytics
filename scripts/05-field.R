@@ -7,12 +7,15 @@ pacman::p_load(ggplot2,
 
 showtext_auto()
 
+# load data
 dat <- readr::read_csv("data/targets-2.csv")
 
+# generate a random vector of numbers within the field boundaries
 set.seed(58)
-# generate a random vector of numbers between 1 and 6
+
 y <- runif(200, min = 0.0, max = 13)
 x <- runif(200, min = 0.0, max = 6)
+
 df <- data.frame(x,y)
 
 # add fonts
@@ -90,6 +93,7 @@ tg +
 
 my_colors<- paletteer::paletteer_c("grDevices::Reds 2", 14, direction = -1)
 
+## create heatmap
 tg +
   stat_density2d_filled(data = df, aes(x,y), alpha = .75) +
   scale_fill_manual(values = my_colors) +
@@ -138,5 +142,6 @@ tg +
         plot.background = element_rect(fill = "#F1F1F1FF", color = "#F1F1F1FF"),
         plot.margin = unit(c(2,.5,3,.5),"mm"))
 
+# save visual
 ggsave("test.png", height = 3, width = 2, dpi = 300)
 
